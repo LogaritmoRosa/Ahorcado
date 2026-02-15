@@ -55,7 +55,7 @@ int ComprobarDim(char array[], int dim) {
 //Funcion para escribir una letra de un array en otro
 void CambiarPorLetra(char array1[], char array2[], char letra, int dim) {
 
-	for (int i=0;i<dim;i++) {
+	for (int i = 0;i < dim;i++) {
 
 		if (array1[i] == letra) {
 
@@ -66,6 +66,7 @@ void CambiarPorLetra(char array1[], char array2[], char letra, int dim) {
 	}
 
 }
+
 //Mostrar array por pantalla
 void MostrarArray(char array[], int dim) {
 
@@ -77,17 +78,51 @@ void MostrarArray(char array[], int dim) {
 
 }
 
+//Mostrar letras por pantalla
+void MostrarLetras(char letras[], int dim) {
+
+	for (int i = 0;i < dim;i++) {
+
+		if (i != 0 && i != dim) {
+
+			cout << ", ";
+
+		}
+
+		cout << letras[i];
+
+	}
+
+}
+
+//Cambiar todas las letras a mayuscula
+void letrasMayusculas(char palabras[], int dim) {
+
+	for (int i = 0; i < dim; i++) {
+
+		if (palabras[i] >= 'a' && palabras[i] <= 'z') {
+
+			palabras[i] = palabras[i] - 32;
+
+		}
+
+	}
+
+}
+
 const int DIM = 20;
 const int OP = 10;
 int main() {
 
-	int dimpalabra = 0, contador = 0, letrapertenece;
-	char palabra[DIM], palabranum[DIM], letra;
+	int dimpalabra = 0, contador = 0, letrapertenece, indiceletras = 0, existeletra = -1;
+	char palabra[DIM], palabranum[DIM], letras[DIM], letra;
 	bool lleno = false;
 
 	cout << "===== AHORCADO =====" << endl;
 	cout << "Usuario 1, escoge una palabra (maximo 20 letras): ";
 	cin >> palabra;
+
+	letrasMayusculas(palabra, DIM);
 
 	system("cls");
 
@@ -100,25 +135,45 @@ int main() {
 		cout << "Usuario 2, escoge una letra: ";
 		cin >> letra;
 
+		if (letra >= 'a' && letra <= 'z') {
+
+			letra = letra - 32;
+
+		}
+
 		letrapertenece = ComprobarLetra(palabra, dimpalabra, letra);
 
 		if (letrapertenece == 1) {
 
 			CambiarPorLetra(palabra, palabranum, letra, dimpalabra);
 
-			cout << "Palabra: ";
+			cout << "Letra correcta, palabra: --> ";
 			MostrarArray(palabranum, dimpalabra);
-			cout << endl << endl;
+			cout << " <--" << endl;
 
 			lleno = ComprobarDim(palabranum, dimpalabra);
 
 		}
 		else {
 
+			existeletra = ComprobarLetra(letras, DIM, letra);
+
+			if (existeletra == -1) {
+
+				letras[indiceletras] = letra;
+				indiceletras++;
+
+			}
+
 			contador++;
-			cout << "Letra incorrecta, oportunidades restantes: " << OP - contador << endl << endl;
+			cout << "Letra incorrecta, oportunidades restantes: " << OP - contador << endl;
+			cout << "- Letras utilizadas e incorrectas: ";
+			MostrarLetras(letras, indiceletras);
+			cout << endl;
 
 		}
+
+		cout << endl;
 
 	} while (contador < OP && lleno == 0);
 
