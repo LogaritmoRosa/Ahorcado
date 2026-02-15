@@ -4,7 +4,8 @@
 using namespace std;
 
 //Inicializar un array cualquiera
-void inicializarArray(char array[], int dim) {
+void inicializarArray(char array[], int dim)
+{
 
 	for (int i = 0; i < dim; i++)
 	{
@@ -14,7 +15,8 @@ void inicializarArray(char array[], int dim) {
 }
 
 //Función para comprobar si letra pertenece a array
-int	comprobarLetra(char array[], int dim, char letra) {
+int	comprobarLetra(char array[], int dim, char letra)
+{
 
 	int ret = -1;
 
@@ -35,7 +37,8 @@ int	comprobarLetra(char array[], int dim, char letra) {
 }
 
 //Función para comprobar si un array esta lleno
-int comprobarDim(char array[], int dim) {
+int comprobarDim(char array[], int dim)
+{
 
 	int i = 0;
 	bool lleno = true;
@@ -57,7 +60,8 @@ int comprobarDim(char array[], int dim) {
 }
 
 //Funcion para escribir una letra de un array en otro
-void cambiarPorLetra(char array1[], char array2[], char letra, int dim) {
+void cambiarPorLetra(char array1[], char array2[], char letra, int dim)
+{
 
 	for (int i = 0;i < dim;i++)
 	{
@@ -143,6 +147,8 @@ int main() {
 	dimPalabra = strlen(palabra);
 
 	inicializarArray(palabraNum, dimPalabra);
+
+	cout << "===== AHORCADO =====" << endl;
 
 	do
 	{
