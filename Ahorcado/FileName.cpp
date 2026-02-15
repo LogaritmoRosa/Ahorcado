@@ -4,22 +4,25 @@
 using namespace std;
 
 //Inicializar un array cualquiera
-void InicializarArray(char array[], int dim) {
+void inicializarArray(char array[], int dim) {
 
-	for (int i = 0; i < dim; i++) {
+	for (int i = 0; i < dim; i++)
+	{
 		array[i] = '_';
 	}
 
 }
 
 //Función para comprobar si letra pertenece a array
-int	ComprobarLetra(char array[], int dim, char letra) {
+int	comprobarLetra(char array[], int dim, char letra) {
 
 	int ret = -1;
 
-	for (int i = 0;i < dim;i++) {
+	for (int i = 0;i < dim;i++)
+	{
 
-		if (array[i] == letra) {
+		if (array[i] == letra)
+		{
 
 			ret = 1;
 
@@ -32,13 +35,14 @@ int	ComprobarLetra(char array[], int dim, char letra) {
 }
 
 //Función para comprobar si un array esta lleno
-int ComprobarDim(char array[], int dim) {
+int comprobarDim(char array[], int dim) {
 
 	int i = 0;
 	bool lleno = true;
 	while (i < dim && lleno == true) {
 
-		if (array[i] == '_') {
+		if (array[i] == '_')
+		{
 
 			lleno = false;
 
@@ -53,11 +57,13 @@ int ComprobarDim(char array[], int dim) {
 }
 
 //Funcion para escribir una letra de un array en otro
-void CambiarPorLetra(char array1[], char array2[], char letra, int dim) {
+void cambiarPorLetra(char array1[], char array2[], char letra, int dim) {
 
-	for (int i = 0;i < dim;i++) {
+	for (int i = 0;i < dim;i++)
+	{
 
-		if (array1[i] == letra) {
+		if (array1[i] == letra)
+		{
 
 			array2[i] = array1[i];
 
@@ -68,9 +74,11 @@ void CambiarPorLetra(char array1[], char array2[], char letra, int dim) {
 }
 
 //Mostrar array por pantalla
-void MostrarArray(char array[], int dim) {
+void mostrarArray(char array[], int dim)
+{
 
-	for (int i = 0;i < dim;i++) {
+	for (int i = 0;i < dim;i++)
+	{
 
 		cout << array[i];
 
@@ -79,11 +87,14 @@ void MostrarArray(char array[], int dim) {
 }
 
 //Mostrar letras por pantalla
-void MostrarLetras(char letras[], int dim) {
+void mostrarLetras(char letras[], int dim)
+{
 
-	for (int i = 0;i < dim;i++) {
+	for (int i = 0;i < dim;i++)
+	{
 
-		if (i != 0 && i != dim) {
+		if (i != 0 && i != dim)
+		{
 
 			cout << ", ";
 
@@ -96,11 +107,14 @@ void MostrarLetras(char letras[], int dim) {
 }
 
 //Cambiar todas las letras a mayuscula
-void letrasMayusculas(char palabras[], int dim) {
+void transformaMayusculas(char palabras[], int dim)
+{
 
-	for (int i = 0; i < dim; i++) {
+	for (int i = 0; i < dim; i++)
+	{
 
-		if (palabras[i] >= 'a' && palabras[i] <= 'z') {
+		if (palabras[i] >= 'a' && palabras[i] <= 'z')
+		{
 
 			palabras[i] = palabras[i] - 32;
 
@@ -111,84 +125,91 @@ void letrasMayusculas(char palabras[], int dim) {
 }
 
 const int DIM = 20;
-const int OP = 10;
+const int OPORTUNITATS = 10;
 int main() {
 
-	int dimpalabra = 0, contador = 0, letrapertenece, indiceletras = 0, existeletra = -1;
-	char palabra[DIM], palabranum[DIM], letras[DIM], letra;
+	int dimPalabra = 0, contador = 0, letraPertenece, indiceLetras = 0, existeLetra = -1;
+	char palabra[DIM], palabraNum[DIM], letras[DIM], letra;
 	bool lleno = false;
 
 	cout << "===== AHORCADO =====" << endl;
 	cout << "Usuario 1, escoge una palabra (maximo 20 letras): ";
 	cin >> palabra;
 
-	letrasMayusculas(palabra, DIM);
+	transformaMayusculas(palabra, DIM);
 
 	system("cls");
 
-	dimpalabra = strlen(palabra);
+	dimPalabra = strlen(palabra);
 
-	InicializarArray(palabranum, dimpalabra);
+	inicializarArray(palabraNum, dimPalabra);
 
-	do {
+	do
+	{
 
 		cout << "Usuario 2, escoge una letra: ";
 		cin >> letra;
 
-		if (letra >= 'a' && letra <= 'z') {
+		if (letra >= 'a' && letra <= 'z')
+		{
 
 			letra = letra - 32;
 
 		}
 
-		letrapertenece = ComprobarLetra(palabra, dimpalabra, letra);
+		letraPertenece = comprobarLetra(palabra, dimPalabra, letra);
 
-		if (letrapertenece == 1) {
+		if (letraPertenece == 1)
+		{
 
-			CambiarPorLetra(palabra, palabranum, letra, dimpalabra);
+			cambiarPorLetra(palabra, palabraNum, letra, dimPalabra);
 
 			cout << "Letra correcta, palabra: --> ";
-			MostrarArray(palabranum, dimpalabra);
+			mostrarArray(palabraNum, dimPalabra);
 			cout << " <--" << endl;
 
-			lleno = ComprobarDim(palabranum, dimpalabra);
+			lleno = comprobarDim(palabraNum, dimPalabra);
 
 		}
-		else {
+		else 
+		{
 
-			existeletra = ComprobarLetra(letras, DIM, letra);
+			existeLetra = comprobarLetra(letras, DIM, letra);
 
-			if (existeletra == -1) {
+			if (existeLetra == -1)
+			{
 
-				letras[indiceletras] = letra;
-				indiceletras++;
+				letras[indiceLetras] = letra;
+				indiceLetras++;
 
 			}
 
 			contador++;
-			cout << "Letra incorrecta, oportunidades restantes: " << OP - contador << endl;
+			cout << "Letra incorrecta, oportunidades restantes: " << OPORTUNITATS - contador << endl;
 			cout << "- Letras utilizadas e incorrectas: ";
-			MostrarLetras(letras, indiceletras);
+			mostrarLetras(letras, indiceLetras);
 			cout << endl;
 
 		}
 
 		cout << endl;
 
-	} while (contador < OP && lleno == 0);
+	} while (contador < OPORTUNITATS && lleno == 0);
 
-	if (contador == OP) {
+	if (contador == OPORTUNITATS)
+	{
 
 		cout << "Has perdido :(" << endl;
 		cout << "La palabra correcta era: ";
-		MostrarArray(palabra, dimpalabra);
+		mostrarArray(palabra, dimPalabra);
 		cout << endl << endl;
 
 	}
-	else {
+	else
+	{
 
 		cout << "Has ganado!!! La palabra correcta era: "; 
-		MostrarArray(palabra, dimpalabra);
+		mostrarArray(palabra, dimPalabra);
 		cout << endl << endl;
 
 	}
